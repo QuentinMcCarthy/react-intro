@@ -11,6 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+  		{/* className used instead of class because class as above is a reserved function */}
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
@@ -23,4 +24,5 @@ class App extends Component {
   }
 }
 
+// Allow importing of App class
 export default App;
