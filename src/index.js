@@ -19,10 +19,10 @@ class App extends Component {
 
 					<hr />
 
-					<div className="form-group">
+					<form>
 						<input type="text" className="form-control" id="listInput" />
 						<button type="submit" className="btn btn-primary w-100 mt-2">Add New Item</button>
-					</div>
+					</form>
 				</div>
 			</div>
 		)
