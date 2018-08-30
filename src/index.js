@@ -26,7 +26,9 @@ class App extends Component {
 				}
 			],
 			text: "Hello World!",
-			textType: "h3"
+			textType: "h3",
+			jumboClass: "jumbotron text-center",
+			darkTheme: false
 		}
 
 		this.changeText = this.changeText.bind(this);
@@ -36,7 +38,7 @@ class App extends Component {
 	render(){
 		return (
 			<div>
-				<div className="jumbotron text-center">
+				<div className={this.state.jumboClass}>
 					<h1 className="display-4">Shopping List</h1>
 					<h3 className={this.state.textType}>{this.state.text}</h3>
 
@@ -62,8 +64,15 @@ class App extends Component {
 
 		this.setState({
 			text: "Button has been clicked "+temp+" times",
-			textType: "h3"
+			textType: "h3",
+			darkTheme: !this.state.darkTheme
 		});
+
+		if(!this.state.darkTheme){
+			this.setState({ jumboClass: "jumbotron text-center jumboDark" });
+		} else{
+			this.setState({ jumboClass: "jumbotron text-center" });
+		}
 	}
 
 	changeText2(e){
@@ -73,8 +82,15 @@ class App extends Component {
 
 		this.setState({
 			text: "Other button has been clicked "+temp2+" times",
-			textType: "h4"
+			textType: "h4",
+			darkTheme: !this.state.darkTheme
 		});
+
+		if(!this.state.darkTheme){
+			this.setState({ jumboClass: "jumbotron text-center jumboDark" });
+		} else{
+			this.setState({ jumboClass: "jumbotron text-center" });
+		}
 	}
 }
 
