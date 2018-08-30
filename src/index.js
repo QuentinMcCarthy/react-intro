@@ -4,13 +4,34 @@ import "./index.css";
 import Form from "./form";
 
 class App extends Component {
+	constructor(){
+		super();
+
+		this.state = {
+			list: [
+				{
+					id: 1,
+					name: "Felines"
+				},
+				{
+					id: 2,
+					name: "Vulpines"
+				},
+				{
+					id: 3,
+					name: "Cervines"
+				}
+			]
+		}
+	}
+
 	render(){
 		return (
 			<div>
 				<div className="jumbotron text-center">
 					<h1 className="display-4">Shopping List</h1>
 
-					<ShoppingList />
+					<ShoppingList list={this.state.list} />
 
 					<hr />
 
@@ -26,11 +47,11 @@ class ShoppingList extends Component {
 		return (
 			<div>
 				<ul className="list-group">
-					<li className="list-group-item">Lorem Ipsum</li>
-					<li className="list-group-item">Dolor sit</li>
-					<li className="list-group-item">Amet consectetur</li>
-					<li className="list-group-item">Adipisciing</li>
-					<li className="list-group-item">Elit</li>
+					{
+						this.props.list.map(item => {
+							return <li key={item.id} item={item} className="list-group-item">{item.name}</li>
+						})
+					}
 				</ul>
 			</div>
 		)
