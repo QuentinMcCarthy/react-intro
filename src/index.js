@@ -4,8 +4,8 @@ import "./index.css";
 import Form from "./form";
 
 class App extends Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 
 		this.state = {
 			list: [
@@ -21,8 +21,11 @@ class App extends Component {
 					id: 3,
 					name: "Cervines"
 				}
-			]
+			],
+			text: "Hello World!"
 		}
+
+		this.changeText = this.changeText.bind(this);
 	}
 
 	render(){
@@ -30,15 +33,26 @@ class App extends Component {
 			<div>
 				<div className="jumbotron text-center">
 					<h1 className="display-4">Shopping List</h1>
+					<h3>{this.state.text}</h3>
 
 					<ShoppingList list={this.state.list} />
 
 					<hr />
 
 					<Form />
+
+					<button onClick={this.changeText}>Change State of h3</button>
 				</div>
 			</div>
 		)
+	}
+
+	changeText(e){
+		e.preventDefault();
+
+		// alert("h3 will be changed.");
+
+		this.setState({text: "Button has been clicked"})
 	}
 }
 
