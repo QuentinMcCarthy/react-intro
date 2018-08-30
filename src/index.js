@@ -33,6 +33,7 @@ class App extends Component {
 
 		this.changeText = this.changeText.bind(this);
 		this.changeText2 = this.changeText2.bind(this);
+		this.addNewItemToList = this.addNewItemToList.bind(this);
 	}
 
 	render(){
@@ -46,7 +47,7 @@ class App extends Component {
 
 					<hr />
 
-					<Form />
+					<Form addNew={this.addNewItemToList}/>
 
 					<button onClick={this.changeText}>Button</button>
 					<button onClick={this.changeText2}>Other button</button>
@@ -60,7 +61,7 @@ class App extends Component {
 
 		// alert("h3 will be changed.");
 
-		temp++
+		temp++;
 
 		this.setState({
 			text: "Button has been clicked "+temp+" times",
@@ -78,7 +79,7 @@ class App extends Component {
 	changeText2(e){
 		e.preventDefault();
 
-		temp2++
+		temp2++;
 
 		this.setState({
 			text: "Other button has been clicked "+temp2+" times",
@@ -91,6 +92,15 @@ class App extends Component {
 		} else{
 			this.setState({ jumboClass: "jumbotron text-center" });
 		}
+	}
+
+	addNewItemToList(itemName){
+		var newItem = {
+			id: this.state.list.length + 1,
+			name: itemName
+		};
+
+		this.setState({ list: this.state.list.concat(newItem) });
 	}
 }
 
