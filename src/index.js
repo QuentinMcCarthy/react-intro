@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Form from "./form";
 
+var temp = 0;
+var temp2 = 0;
+
 class App extends Component {
 	constructor(props){
 		super(props);
@@ -22,10 +25,12 @@ class App extends Component {
 					name: "Cervines"
 				}
 			],
-			text: "Hello World!"
+			text: "Hello World!",
+			textType: "h3"
 		}
 
 		this.changeText = this.changeText.bind(this);
+		this.changeText2 = this.changeText2.bind(this);
 	}
 
 	render(){
@@ -33,7 +38,7 @@ class App extends Component {
 			<div>
 				<div className="jumbotron text-center">
 					<h1 className="display-4">Shopping List</h1>
-					<h3>{this.state.text}</h3>
+					<h3 className={this.state.textType}>{this.state.text}</h3>
 
 					<ShoppingList list={this.state.list} />
 
@@ -41,7 +46,8 @@ class App extends Component {
 
 					<Form />
 
-					<button onClick={this.changeText}>Change State of h3</button>
+					<button onClick={this.changeText}>Button</button>
+					<button onClick={this.changeText2}>Other button</button>
 				</div>
 			</div>
 		)
@@ -52,7 +58,23 @@ class App extends Component {
 
 		// alert("h3 will be changed.");
 
-		this.setState({text: "Button has been clicked"})
+		temp++
+
+		this.setState({
+			text: "Button has been clicked "+temp+" times",
+			textType: "h3"
+		});
+	}
+
+	changeText2(e){
+		e.preventDefault();
+
+		temp2++
+
+		this.setState({
+			text: "Other button has been clicked "+temp2+" times",
+			textType: "h4"
+		});
 	}
 }
 
