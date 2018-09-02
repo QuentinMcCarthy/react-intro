@@ -24,7 +24,7 @@ class Form extends Component {
 		var newItem = this.refs.newItem.value.trim();
 
 		if(!newItem){
-			alert("Please enter an item");
+			alert(`Please enter an item`);
 			return;
 		}
 
@@ -32,7 +32,7 @@ class Form extends Component {
 
 		this.props.addNew(newItem);
 
-		this.refs.newItem.value = "";
+		this.refs.newItem.value = ``;
 	}
 }
 

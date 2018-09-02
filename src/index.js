@@ -14,20 +14,20 @@ class App extends Component {
 			list: [
 				{
 					id: 1,
-					name: "Felines"
+					name: `Felines`
 				},
 				{
 					id: 2,
-					name: "Vulpines"
+					name: `Vulpines`
 				},
 				{
 					id: 3,
-					name: "Cervines"
+					name: `Cervines`
 				}
 			],
-			text: "Hello World!",
-			textType: "h3",
-			jumboClass: "jumbotron text-center",
+			text: `Hello World!`,
+			textType: `h3`,
+			jumboClass: `jumbotron text-center`,
 			darkTheme: false
 		}
 
@@ -64,15 +64,15 @@ class App extends Component {
 		temp++;
 
 		this.setState({
-			text: "Button has been clicked "+temp+" times",
-			textType: "h3",
+			text: `Button has been clicked ${temp} times`,
+			textType: `h3`,
 			darkTheme: !this.state.darkTheme
 		});
 
 		if(!this.state.darkTheme){
-			this.setState({ jumboClass: "jumbotron text-center jumboDark" });
+			this.setState({ jumboClass: `jumbotron text-center jumboDark` });
 		} else{
-			this.setState({ jumboClass: "jumbotron text-center" });
+			this.setState({ jumboClass: `jumbotron text-center` });
 		}
 	}
 
@@ -82,15 +82,15 @@ class App extends Component {
 		temp2++;
 
 		this.setState({
-			text: "Other button has been clicked "+temp2+" times",
-			textType: "h4",
+			text: `Other button has been clicked ${temp2} times`,
+			textType: `h4`,
 			darkTheme: !this.state.darkTheme
 		});
 
 		if(!this.state.darkTheme){
-			this.setState({ jumboClass: "jumbotron text-center jumboDark" });
+			this.setState({ jumboClass: `jumbotron text-center jumboDark` });
 		} else{
-			this.setState({ jumboClass: "jumbotron text-center" });
+			this.setState({ jumboClass: `jumbotron text-center` });
 		}
 	}
 
@@ -114,7 +114,7 @@ class ShoppingList extends Component {
 							return (
 								<li key={item.id} item={item} className="list-group-item">{item.name}
 									<span className="controls">
-										<span className="edit" onClick={this.editItem}>Edit</span> - <span className="delete" onClick={this.deleteItem}>Delete</span>
+										<span className="edit" onClick={this.editItem.bind(this, item)}>Edit</span> - <span className="delete" onClick={this.deleteItem.bind(this, item)}>Delete</span>
 										{/*<button onClick={this.editItem}>Edit</button>*/}
 										{/*<button onClick={this.deleteItem}>Delete</button>*/}
 									</span>
@@ -127,12 +127,14 @@ class ShoppingList extends Component {
 		)
 	}
 
-	editItem(){
-		console.log("Editing item");
+	editItem(item){
+		console.log(`Editing: `);
+		console.log(item);
 	}
 
-	deleteItem(){
-		console.log("Deleting item");
+	deleteItem(item){
+		console.log(`Deleting: `);
+		console.log(item);
 	}
 }
 
