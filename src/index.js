@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Form from "./form";
 
+// Variables for the theme changing buttons
 var temp = 0;
 var temp2 = 0;
 
@@ -10,6 +11,7 @@ class App extends Component {
 	constructor(props){
 		super(props);
 
+		// This is a state. States should contain things that are going to change
 		this.state = {
 			list: [
 				{
@@ -31,11 +33,13 @@ class App extends Component {
 			darkTheme: false
 		}
 
+		// Binding functions to the constructor
 		this.changeText = this.changeText.bind(this);
 		this.changeText2 = this.changeText2.bind(this);
 		this.addNewItemToList = this.addNewItemToList.bind(this);
 	}
 
+	// Rendering JSX
 	render(){
 		return (
 			<div>
@@ -43,11 +47,14 @@ class App extends Component {
 					<h1 className="display-4">Shopping List</h1>
 					<h3 className={this.state.textType}>{this.state.text}</h3>
 
-					<ShoppingList list={this.state.list} />
+					<ShoppingList
+						list={this.state.list}
+						editItem={this.handleEdit}
+					/>
 
 					<hr />
 
-					<Form addNew={this.addNewItemToList}/>
+					<Form addNew={this.addNewItemToList} />
 
 					<button onClick={this.changeText}>Button</button>
 					<button onClick={this.changeText2}>Other button</button>
@@ -56,6 +63,7 @@ class App extends Component {
 		)
 	}
 
+	// Functions defined below
 	changeText(e){
 		e.preventDefault();
 
@@ -63,6 +71,8 @@ class App extends Component {
 
 		temp++;
 
+		// Changing the state involves changing the state object.
+		// This changes things in the JSX, if defined.
 		this.setState({
 			text: `Button has been clicked ${temp} times`,
 			textType: `h3`,
@@ -81,6 +91,8 @@ class App extends Component {
 
 		temp2++;
 
+		// Changing the state involves changing the state object.
+		// This changes things in the JSX, if defined.
 		this.setState({
 			text: `Other button has been clicked ${temp2} times`,
 			textType: `h4`,
@@ -94,16 +106,28 @@ class App extends Component {
 		}
 	}
 
+	// Adding a new item to the list
 	addNewItemToList(itemName){
+		// The new item should have the same syntax as the others.
+		// The "id" of the item should be unique, so define it as the list's length + 1
+		// This way of defining the id will not work when deletion comes into play,
+		// as if an item is deleted, the list length + 1 may no longer be unique.
 		var newItem = {
 			id: this.state.list.length + 1,
 			name: itemName
 		};
 
+		// "concat" adds items to the end of the list.
 		this.setState({ list: this.state.list.concat(newItem) });
+	}
+
+	// Handling editing of the listi tem.
+	handleEdit(itemToEdit){
+		console.log(itemToEdit);
 	}
 }
 
+// Separate class, defined in the "App" class' JSX
 class ShoppingList extends Component {
 	render(){
 		return (
@@ -114,12 +138,12 @@ class ShoppingList extends Component {
 							return (
 								<li key={item.id} item={item} className="list-group-item">{item.name}
 									<span className="controls">
-										<span className="edit" onClick={this.editItem.bind(this, item)}>Edit</span> - <span className="delete" onClick={this.deleteItem.bind(this, item)}>Delete</span>
-										{/*<button onClick={this.editItem}>Edit</button>*/}
-										{/*<button onClick={this.deleteItem}>Delete</button>*/}
+										<span className="edit" onClick={this.edit.bind(this, item)}>Edit</span> - <span className="delete" onClick={this.delete.bind(this, item)}>Delete</span>
+										{/*<button onClick={this.edit}>Edit</button>*/}
+										{/*<button onClick={this.delete}>Delete</button>*/}
 									</span>
 								</li>
-							)
+							);
 						})
 					}
 				</ul>
@@ -127,15 +151,18 @@ class ShoppingList extends Component {
 		)
 	}
 
-	editItem(item){
+	// Editing of the item calls a handler for the editing, defined in App
+	edit(item){
 		console.log(`Editing: `);
-		console.log(item);
+		this.props.editItem(item);
 	}
 
-	deleteItem(item){
+	// Deletion of the item calls a handler for the deletion, defined in App
+	delete(item){
 		console.log(`Deleting: `);
 		console.log(item);
 	}
 }
 
+// Render the JSX on the HTML element "root" defined in ./public/index.html
 ReactDOM.render(<App />, document.getElementById("root"));

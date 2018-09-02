@@ -4,6 +4,7 @@ class Form extends Component {
 	constructor(props){
 		super(props);
 
+		// Binding functions to the constructor
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
@@ -18,9 +19,11 @@ class Form extends Component {
 		)
 	}
 
+	// When the form is submitted i.e. a "submit" type is clicked within the form element.
 	onSubmit(e){
 		e.preventDefault();
 
+		// trim() deletes whitespace from around the value.
 		var newItem = this.refs.newItem.value.trim();
 
 		if(!newItem){
