@@ -41,6 +41,7 @@ class App extends Component {
 		this.changeText2 = this.changeText2.bind(this);
 		this.addNewItemToList = this.addNewItemToList.bind(this);
 		this.handleEdit = this.handleEdit.bind(this);
+		this.handleChangeText = this.handleChangeText.bind(this);
 	}
 
 	// Rendering JSX
@@ -62,6 +63,8 @@ class App extends Component {
 					<Form
 						{...this.state}
 						addNew={this.addNewItemToList}
+						updateItem={this.handleUpdate}
+						changeText={this.handleChangeText}
 					/>
 
 					<button onClick={this.changeText}>Button</button>
@@ -135,11 +138,21 @@ class App extends Component {
 			editID: itemToEdit.id,
 			buttonText: `Edit Item`,
 			editingValue: itemToEdit.name
-		})
+		});
 	}
 
 	handleDelete(itemToDelete){
 		console.log(itemToDelete);
+	}
+
+	handleUpdate(updatedItem){
+		console.log(updatedItem);
+	}
+
+	handleChangeText(inputValue){
+		this.setState({
+			editingValue: inputValue
+		});
 	}
 }
 

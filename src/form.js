@@ -6,13 +6,14 @@ class Form extends Component {
 
 		// These functions are bound to the constructor because they change the state
 		this.onSubmit = this.onSubmit.bind(this);
+		this.onChange = this.onChange.bind(this);
 	}
 
 	render(){
 		return (
 			<div>
 				<form onSubmit={this.onSubmit}>
-					<input type="text" ref="newItem" className="form-control" id="listInput" value={this.props.editingValue} />
+					<input type="text" ref="newItem" className="form-control" id="listInput" value={this.props.editingValue} onChange={this.onChange} />
 					<button type="submit" className="btn btn-primary w-100 mt-2">{this.props.buttonText}</button>
 				</form>
 			</div>
@@ -31,11 +32,23 @@ class Form extends Component {
 			return;
 		}
 
-		// console.log(newItem);
+		// this.props.editID === 0
+		if(!this.props.editID){
+			this.props.addNew(newItem);
+		} else {
+			let updatingItem = {
+				id: this.props.editID,
+				item: newItem
+			}
 
-		this.props.addNew(newItem);
+			this.props.updateItem(updatingItem);
+		}
 
 		this.refs.newItem.value = ``;
+	}
+
+	onChange(e){
+		this.props.changeText(e.target.value);
 	}
 }
 
