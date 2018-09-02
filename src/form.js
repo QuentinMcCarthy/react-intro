@@ -4,7 +4,7 @@ class Form extends Component {
 	constructor(props){
 		super(props);
 
-		// Binding functions to the constructor
+		// These functions are bound to the constructor because they change the state
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
@@ -12,8 +12,8 @@ class Form extends Component {
 		return (
 			<div>
 				<form onSubmit={this.onSubmit}>
-					<input type="text" ref="newItem" className="form-control text-center" id="listInput" />
-					<button type="submit" className="btn btn-primary w-100 mt-2">Add New Item</button>
+					<input type="text" ref="newItem" className="form-control" id="listInput" value={this.props.editingValue} />
+					<button type="submit" className="btn btn-primary w-100 mt-2">{this.props.buttonText}</button>
 				</form>
 			</div>
 		)

@@ -30,13 +30,17 @@ class App extends Component {
 			text: `Hello World!`,
 			textType: `h3`,
 			jumboClass: `jumbotron text-center`,
-			darkTheme: false
+			darkTheme: false,
+			editID: 0,
+			buttonText: `Add New Item`,
+			editingValue: ``
 		}
 
-		// Binding functions to the constructor
+		// These functions are bound to the constructor because they change the state
 		this.changeText = this.changeText.bind(this);
 		this.changeText2 = this.changeText2.bind(this);
 		this.addNewItemToList = this.addNewItemToList.bind(this);
+		this.handleEdit = this.handleEdit.bind(this);
 	}
 
 	// Rendering JSX
@@ -55,7 +59,10 @@ class App extends Component {
 
 					<hr />
 
-					<Form addNew={this.addNewItemToList} />
+					<Form
+						{...this.state}
+						addNew={this.addNewItemToList}
+					/>
 
 					<button onClick={this.changeText}>Button</button>
 					<button onClick={this.changeText2}>Other button</button>
@@ -124,7 +131,11 @@ class App extends Component {
 
 	// Handling editing of the listi tem.
 	handleEdit(itemToEdit){
-		console.log(itemToEdit);
+		this.setState({
+			editID: itemToEdit.id,
+			buttonText: `Edit Item`,
+			editingValue: itemToEdit.name
+		})
 	}
 
 	handleDelete(itemToDelete){
@@ -141,7 +152,8 @@ class ShoppingList extends Component {
 					{
 						this.props.list.map(item => {
 							return (
-								<li key={item.id} item={item} className="list-group-item">{item.name}
+								<li key={item.id} item={item} className="list-group-item text-left">
+									{item.name}
 									<span className="controls">
 										<span className="edit" onClick={this.edit.bind(this, item)}>Edit</span> - <span className="delete" onClick={this.delete.bind(this, item)}>Delete</span>
 										{/*<button onClick={this.edit}>Edit</button>*/}
@@ -158,13 +170,11 @@ class ShoppingList extends Component {
 
 	// Editing of the item calls a handler for the editing, defined in App
 	edit(item){
-		console.log(`Editing: `);
 		this.props.editItem(item);
 	}
 
 	// Deletion of the item calls a handler for the deletion, defined in App
 	delete(item){
-		console.log(`Deleting: `);
 		this.props.deleteItem(item);
 	}
 }
