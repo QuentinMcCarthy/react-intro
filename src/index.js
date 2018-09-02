@@ -50,6 +50,7 @@ class App extends Component {
 					<ShoppingList
 						list={this.state.list}
 						editItem={this.handleEdit}
+						deleteItem={this.handleDelete}
 					/>
 
 					<hr />
@@ -125,6 +126,10 @@ class App extends Component {
 	handleEdit(itemToEdit){
 		console.log(itemToEdit);
 	}
+
+	handleDelete(itemToDelete){
+		console.log(itemToDelete);
+	}
 }
 
 // Separate class, defined in the "App" class' JSX
@@ -160,7 +165,7 @@ class ShoppingList extends Component {
 	// Deletion of the item calls a handler for the deletion, defined in App
 	delete(item){
 		console.log(`Deleting: `);
-		console.log(item);
+		this.props.deleteItem(item);
 	}
 }
 
