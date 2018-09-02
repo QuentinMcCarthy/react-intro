@@ -111,12 +111,28 @@ class ShoppingList extends Component {
 				<ul className="list-group">
 					{
 						this.props.list.map(item => {
-							return <li key={item.id} item={item} className="list-group-item">{item.name}</li>
+							return (
+								<li key={item.id} item={item} className="list-group-item">{item.name}
+									<span className="controls">
+										<span className="edit" onClick={this.editItem}>Edit</span> - <span className="delete" onClick={this.deleteItem}>Delete</span>
+										{/*<button onClick={this.editItem}>Edit</button>*/}
+										{/*<button onClick={this.deleteItem}>Delete</button>*/}
+									</span>
+								</li>
+							)
 						})
 					}
 				</ul>
 			</div>
 		)
+	}
+
+	editItem(){
+		console.log("Editing item");
+	}
+
+	deleteItem(){
+		console.log("Deleting item");
 	}
 }
 
