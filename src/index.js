@@ -41,6 +41,7 @@ class App extends Component {
 		this.changeText2 = this.changeText2.bind(this);
 		this.addNewItemToList = this.addNewItemToList.bind(this);
 		this.handleEdit = this.handleEdit.bind(this);
+		this.handleUpdate = this.handleUpdate.bind(this);
 		this.handleChangeText = this.handleChangeText.bind(this);
 	}
 
@@ -146,7 +147,22 @@ class App extends Component {
 	}
 
 	handleUpdate(updatedItem){
-		console.log(updatedItem);
+		let  allItems = this.state.list;
+
+		for(var i = 0; i < allItems.length; i++){
+			if(allItems[i].id === updatedItem.id){
+				allItems[i].name = updatedItem.name;
+
+				break;
+			}
+		}
+
+		this.setState({
+			list: allItems,
+			editID: 0,
+			buttonText: `Add New Item`,
+			editingValue: ``
+		})
 	}
 
 	handleChangeText(inputValue){

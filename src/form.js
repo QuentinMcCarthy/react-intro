@@ -38,7 +38,7 @@ class Form extends Component {
 		} else {
 			let updatingItem = {
 				id: this.props.editID,
-				item: newItem
+				name: newItem
 			}
 
 			this.props.updateItem(updatingItem);
