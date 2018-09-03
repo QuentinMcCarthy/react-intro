@@ -131,7 +131,10 @@ class App extends Component {
 		};
 
 		// "concat" adds items to the end of the list.
-		this.setState({ list: this.state.list.concat(newItem) });
+		this.setState({
+			list: this.state.list.concat(newItem),
+			editingValue: ``
+		});
 	}
 
 	// Handling editing of the listi tem.
